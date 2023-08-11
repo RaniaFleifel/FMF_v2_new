@@ -3,5 +3,4 @@ Gunicorn
 Datetime
 Pandas
 Tabulate
-Re
 pretty_html_table
