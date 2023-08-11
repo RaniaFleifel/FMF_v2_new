@@ -1,0 +1,5 @@
+Flask
+Gunicorn
+Datetime
+Pandas
+Tabulate
