@@ -20,6 +20,7 @@ import re
 from pretty_html_table import build_table
 
 a=[]
+b=[]
 entries=[]
 app=Flask(__name__,template_folder='templates')
 options_month = ['jan', 'feb', 'mar','apr','may','jun','jul','aug','sep','oct','nov','dec']
@@ -31,31 +32,36 @@ def home():
 
 @app.route('/calculations',methods=['POST'])
 def calculations():
+    #a=[]
+
     data=request.form#.values()
 
     amount=int(data["amount"])
-    a.append(amount)
-    print("###############",a)
+    
 
     while amount>15000: 
         tmp="The cap of the loan is 15000!.. Please re-enter the loan amount"
         return render_template('ideal_html.html',loan_size_txt_no=tmp)#.append('The size of the loan is {} egp\n'.format(loan_size[0])))
     else:
+        a.append(amount)
+
         tmp=f"Loan amount: {amount} EGP"
         return render_template('ideal_html.html',loan_size_txt_yes=tmp)#.append('The size of the loan is {} egp\n'.format(loan_size[0])))
-
+    #print("############### IN CALCULATIONS",a)
+    
 @app.route('/payment_schedule',methods=['POST'])
 def payment_schedule():
     #print("############### IN PAYMENT SCHEDULE",a[0])
 
-    loan_size=a[0]
-    #print("############### IN PAYMENT SCHEDULE",loan_size)
+    loan_size=a[len(a)-1]#in case of multiple entries 
+    #print("############### IN PAYMENT SCHEDULE",loan_size,'LEN(A)',len(a))
 
     data=request.form
-    #a.append(data)
-    print(data)
+    b.append(data)
+    #print(data)
     frequency=data["frequency"]
     holiday_yn=data["holiday"]
+    #print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>b after append",b,'LEN(B)',len(b))
 
     if data["grace"]=="no":
         grace_yn=data["grace"]
@@ -96,7 +102,7 @@ def payment_schedule():
 
     df = pd.DataFrame(columns=['month','std_loan','flexible_loan'])
     monthly_share=round((loan_size+(interest_rate*loan_size))/12,1)    
-    print("monthly_share",monthly_share,start_month)
+    #print("monthly_share",monthly_share,start_month)
 
     num_months=12+holiday_dur+grace_dur
     loc_start_month=options_month.index(start_month)
@@ -113,7 +119,7 @@ def payment_schedule():
 
             
             
-    print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%',grace_yn,holiday_yn,)
+    #print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%',grace_yn,holiday_yn,)
         
     if grace_yn=='no' and holiday_yn=='no':
         num_months=12
@@ -126,7 +132,7 @@ def payment_schedule():
             df.loc[i]=new_line
                 
         df.loc[i+1]=["total",round(df['std_loan'].sum(),1),round(df['flexible_loan'].sum(),1)]
-        print(df)
+        #print(df)
     elif grace_yn=='yes' and holiday_yn=='no':
         num_months=12+grace_dur
         loc_start_month=options_month.index(start_month)
@@ -151,7 +157,7 @@ def payment_schedule():
                 df.loc[i]=new_line
                 
         df.loc[i+1]=["total",round(df['std_loan'].sum(),1),round(df['flexible_loan'].sum(),1)]
-        print(df)
+        #print(df)
         
     elif grace_yn=='no' and holiday_yn=='yes':
         num_months=12+holiday_dur
@@ -182,7 +188,7 @@ def payment_schedule():
                 df.loc[i]=new_line
         
         df.loc[i+1]=["total",round(df['std_loan'].sum(),1),round(df['flexible_loan'].sum(),1)]
-        print(df)
+        #print(df)
     elif grace_yn=='yes' and holiday_yn=='yes':
         num_months=12+holiday_dur+grace_dur
         loc_start_month=options_month.index(start_month)
