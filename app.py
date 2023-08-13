@@ -47,21 +47,21 @@ def calculations():
 
         tmp=f"Loan amount: {amount} EGP"
         return render_template('ideal_html.html',loan_size_txt_yes=tmp)#.append('The size of the loan is {} egp\n'.format(loan_size[0])))
-    #print("############### IN CALCULATIONS",a)
+    print("############### IN CALCULATIONS",a)
     
 @app.route('/payment_schedule',methods=['POST'])
 def payment_schedule():
     #print("############### IN PAYMENT SCHEDULE",a[0])
 
     loan_size=a[len(a)-1]#in case of multiple entries 
-    #print("############### IN PAYMENT SCHEDULE",loan_size,'LEN(A)',len(a))
+    print("############### IN PAYMENT SCHEDULE",loan_size,'LEN(A)',len(a))
 
     data=request.form
     b.append(data)
-    #print(data)
+    print(data)
     frequency=data["frequency"]
     holiday_yn=data["holiday"]
-    #print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>b after append",b,'LEN(B)',len(b))
+    print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>b after append",b,'LEN(B)',len(b))
 
     if data["grace"]=="no":
         grace_yn=data["grace"]
@@ -101,8 +101,8 @@ def payment_schedule():
 #    print(str(start_month_txt),frequency_txt,grace_txt,holiday_txt)
 
     df = pd.DataFrame(columns=['month','std_loan','flexible_loan'])
-    monthly_share=round((loan_size+(interest_rate*loan_size))/12,1)    
-    #print("monthly_share",monthly_share,start_month)
+    monthly_share=(loan_size+(interest_rate*loan_size))/12    
+    print("monthly_share",monthly_share,start_month)
 
     num_months=12+holiday_dur+grace_dur
     loc_start_month=options_month.index(start_month)
@@ -119,7 +119,7 @@ def payment_schedule():
 
             
             
-    #print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%',grace_yn,holiday_yn,)
+    print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%',grace_yn,holiday_yn,)
         
     if grace_yn=='no' and holiday_yn=='no':
         num_months=12
@@ -131,8 +131,8 @@ def payment_schedule():
 
             df.loc[i]=new_line
                 
-        df.loc[i+1]=["total",round(df['std_loan'].sum(),1),round(df['flexible_loan'].sum(),1)]
-        #print(df)
+        df.loc[i+1]=["total",df['std_loan'].sum(),df['flexible_loan'].sum()]
+        print(df)
     elif grace_yn=='yes' and holiday_yn=='no':
         num_months=12+grace_dur
         loc_start_month=options_month.index(start_month)
@@ -147,17 +147,17 @@ def payment_schedule():
             this_month=options_month[(loc_start_month+i)%12]
                     
             if i in range(grace_dur):
-                new_line=[this_month,monthly_share,round(updated_monthly_intrest,1)]    
+                new_line=[this_month,monthly_share,updated_monthly_intrest]    
                 df.loc[i]=new_line
             elif i>=12:
-                new_line=[this_month,0,round(flexible_monthly_share,1)]  
+                new_line=[this_month,0,flexible_monthly_share]  
                 df.loc[i]=new_line
             else:
-                new_line=[this_month,monthly_share,round(flexible_monthly_share,1)]    
+                new_line=[this_month,monthly_share,flexible_monthly_share]    
                 df.loc[i]=new_line
                 
-        df.loc[i+1]=["total",round(df['std_loan'].sum(),1),round(df['flexible_loan'].sum(),1)]
-        #print(df)
+        df.loc[i+1]=["total",df['std_loan'].sum(),df['flexible_loan'].sum()]
+        print(df)
         
     elif grace_yn=='no' and holiday_yn=='yes':
         num_months=12+holiday_dur
@@ -176,19 +176,19 @@ def payment_schedule():
 
             if this_month.capitalize() in holiday_months and x<holiday_dur:
                 #covered=1
-                new_line=[this_month,monthly_share,round(updated_monthly_intrest,1)]    
+                new_line=[this_month,monthly_share,updated_monthly_intrest]    
                 df.loc[i]=new_line
                 x+=1
             
             elif i>=12:
-                new_line=[this_month,0,round(flexible_monthly_share,1)]  
+                new_line=[this_month,0,flexible_monthly_share]  
                 df.loc[i]=new_line
             else:
-                new_line=[this_month,monthly_share,round(flexible_monthly_share,1)]    
+                new_line=[this_month,monthly_share,flexible_monthly_share]    
                 df.loc[i]=new_line
         
-        df.loc[i+1]=["total",round(df['std_loan'].sum(),1),round(df['flexible_loan'].sum(),1)]
-        #print(df)
+        df.loc[i+1]=["total",df['std_loan'].sum(),df['flexible_loan'].sum()]
+        print(df)
     elif grace_yn=='yes' and holiday_yn=='yes':
         num_months=12+holiday_dur+grace_dur
         loc_start_month=options_month.index(start_month)
@@ -209,20 +209,20 @@ def payment_schedule():
                 df.loc[i]=new_line
                 x+=1
                 if i>=num_months-holiday_dur-grace_dur:
-                    new_line=[this_month,0,round(updated_monthly_intrest,0)]  
+                    new_line=[this_month,0,updated_monthly_intrest]  
                     df.loc[i]=new_line
             elif i in range(grace_dur):
-                new_line=[this_month,monthly_share,round(updated_monthly_intrest,1)]    
+                new_line=[this_month,monthly_share,updated_monthly_intrest]    
                 df.loc[i]=new_line
               
             elif i>=num_months-holiday_dur-grace_dur:
-                new_line=[this_month,0,round(flexible_monthly_share,1)]  
+                new_line=[this_month,0,flexible_monthly_share]  
                 df.loc[i]=new_line
             else:
-                new_line=[this_month,monthly_share,round(flexible_monthly_share,1)]    
+                new_line=[this_month,monthly_share,flexible_monthly_share]    
                 df.loc[i]=new_line 
                 
-        df.loc[i+1]=["total",round(df['std_loan'].sum(),1),round(df['flexible_loan'].sum(),1)]
+        df.loc[i+1]=["total",df['std_loan'].sum(),df['flexible_loan'].sum()]
     #tablef=tabulate(df, headers='keys', tablefmt='psql')#psql')
     #print(tablef)
     # df_styled = df.style\
