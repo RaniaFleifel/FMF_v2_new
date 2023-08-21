@@ -256,7 +256,7 @@ def payment_schedule():
                 
                 this_month=options_month[(loc_start_month+int(i/4))%12].capitalize()
                 
-                if i in range(grace_dur):
+                if i in range(grace_dur*4):
                     new_line=[this_month+", week1",0,round(updated_monthly_intrest/4,2)]    
                     df.loc[i]=new_line
                     new_line=[this_month+", week2",0,round(updated_monthly_intrest/4,2)]    
@@ -444,11 +444,17 @@ def payment_schedule():
                     
     
                     x+=1
-                    if i>=num_months-holiday_dur-grace_dur:
+                    if i>=12:#num_months-holiday_dur-grace_dur:
                         new_line=[this_month,0,round(updated_monthly_intrest,2)]  
                         df.loc[i]=new_line
                         std_loan_noapprox.append(0)
                         flexible_loan_noapprox.append(updated_monthly_intrest)
+                    else:
+                        new_line=[this_month,round(monthly_share,2),round(updated_monthly_intrest,2)]  
+                        df.loc[i]=new_line
+                        std_loan_noapprox.append(monthly_share)
+                        flexible_loan_noapprox.append(updated_monthly_intrest)
+                        
                 elif i in range(grace_dur):
                     new_line=[this_month,round(monthly_share,2),round(updated_monthly_intrest,2)]    
                     df.loc[i]=new_line
