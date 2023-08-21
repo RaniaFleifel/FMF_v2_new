@@ -11,10 +11,11 @@ This is a static survey form from freeCodeCamp
   <style>
     #background {
       font-family: arial;
-      background-image: linear-gradient(115deg,
-          rgba(58, 58, 158, 0.8),
-          rgba(136, 136, 206, 0.7)),
-        url(https://cdn.freecodecamp.org/testable-projects-fcc/images/survey-form-background.jpeg);
+
+      background-image: linear-gradient(245deg,
+		rgba(0, 53, 100, 1),
+		rgba(0, 53, 100, 1));
+
       background-size: cover;
       background-position: center;
     }
@@ -36,11 +37,11 @@ This is a static survey form from freeCodeCamp
     }
 
     #survey-container {
-      background-color: rgba(10, 10, 45, 0.7);
+      background-color: rgba(255, 0, 0, 0.48);
       width: 70%;
       margin-left: 21.5%;
       margin-right: 21.5%;
-      border-color: rgba(10, 10, 45, 0.7);
+      border-color: rgba(255, 0, 0, 0.48);
       border-radius: 10px;
       
     }
@@ -209,13 +210,13 @@ This is a static survey form from freeCodeCamp
       width: 79%;
       margin-left: 11%;
       margin-right: 9%;
-      background-color: #5ebf70;
+      background-color: #003564;
       text-align: center;
       border-radius: 4px;
-      border-color: #5ebf70;
+      border-color: #003564;
       border-style: solid;
       color: white;
-      font-size: 17px;
+      font-size: 25px;
       height: 60px;
       margin-top: 40px;
       margin-bottom: 25px;
@@ -224,10 +225,10 @@ This is a static survey form from freeCodeCamp
       width: 30%;
       margin-left: 11%;
       margin-right: 9%;
-      background-color: #5ebf70;
+      background-color: #003564;
       text-align: center;
       border-radius: 1px;
-      border-color: #5ebf70;
+      border-color: #003564;
       border-style: solid;
       color: white;
       font-size: 17px;
@@ -248,7 +249,7 @@ This is a static survey form from freeCodeCamp
       <button type="submit" id="submit2">Start calculations</button>
       </form>
 
-<p style="margin-left: 10%; margin-right: 10%;color: red;font-size: 20px;">{{loan_size_txt_no}}</p>
+<p style="margin-left: 10%; margin-right: 10%;color: 003564;font-size: 22px;">{{loan_size_txt_no}}</p>
 
 <p style="margin-left: 10%; margin-right: 10%;color: white;font-size: 20px;text-align: center;text-decoration: overline underline">{{loan_size_txt_yes}}</p>
 
@@ -257,10 +258,11 @@ This is a static survey form from freeCodeCamp
       <label id="dropdown-label" for="dropdown">How often will you pay interest?</label>
       <select id="dropdown", name=frequency>
         <option value="monthly">Monthly</option>
-        <option value="weekly"> Weekly</option>
         <option value="biweekly">Biweekly</option>
+        <option value="weekly"> Weekly</option>
+
       </select>
-<p style="margin-left: 10%; margin-right: 10%;color: white;font-size: 15px;">**only Monthly option is working on the website - for now</p>
+
 
       <br>
       <br>
@@ -288,35 +290,35 @@ This is a static survey form from freeCodeCamp
 
       <select id="dropdown2" name=month1>
         <option value=" "></option>
-        <option value="jan">jan</option>
-        <option value="feb">feb</option>
-        <option value="mar">mar</option>
-        <option value="apr">apr</option>
-        <option value="may">may</option>
-        <option value="jun">jun</option>
-        <option value="jul">jul</option>
-        <option value="aug">aug</option>
-        <option value="sep">sep</option>
-        <option value="oct">oct</option>
-        <option value="nov">nov</option>
-        <option value="dec">dec</option>
+        <option value="jan">Jan</option>
+        <option value="feb">Feb</option>
+        <option value="mar">Mar</option>
+        <option value="apr">Apr</option>
+        <option value="may">May</option>
+        <option value="Jun">Jun</option>
+        <option value="jul">Jul</option>
+        <option value="aug">Aug</option>
+        <option value="sep">Sep</option>
+        <option value="oct">Oct</option>
+        <option value="nov">Nov</option>
+        <option value="dec">Dec</option>
       </select>
 
       
       <select id="dropdown2" name=month2>
         <option value=" "></option>
-        <option value="jan">jan</option>
-        <option value="feb">feb</option>
-        <option value="mar">mar</option>
-        <option value="apr">apr</option>
-        <option value="may">may</option>
-        <option value="jun">jun</option>
-        <option value="jul">jul</option>
-        <option value="aug">aug</option>
-        <option value="sep">sep</option>
-        <option value="oct">oct</option>
-        <option value="nov">nov</option>
-        <option value="dec">dec</option>
+        <option value="jan">Jan</option>
+        <option value="feb">Feb</option>
+        <option value="mar">Mar</option>
+        <option value="apr">Apr</option>
+        <option value="may">May</option>
+        <option value="jun">Jun</option>
+        <option value="jul">Jul</option>
+        <option value="aug">Aug</option>
+        <option value="sep">Sep</option>
+        <option value="oct">Oct</option>
+        <option value="nov">Nov</option>
+        <option value="dec">Dec</option>
       </select>
       <br>
       <br>
@@ -324,8 +326,6 @@ This is a static survey form from freeCodeCamp
         <input type="radio" value="no" name="holiday">No
       </label>
       <br>
-      <br>
-
 
       <button type="submit" id="submit">Submit</button>
     </form>
