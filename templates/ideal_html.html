@@ -28,7 +28,6 @@ This is a static survey form from freeCodeCamp
 
   gtag('config', 'G-F9N3ZD96FF');
 </script>
-
 <body id="background">
   <header>
     <h1 id="title">Flexible Loan payment schedules</h1>
@@ -157,7 +156,16 @@ This is a static survey form from freeCodeCamp
       font-size: 20px;
     }
 
-    #recommend {
+    #recommend_grace {
+      width: 80%;
+      margin-left: 10%;
+      margin-right: 10%;
+      height: 30px;
+      border-radius: 7px;
+      font-size: 19px;
+      color: white;
+    }
+    #recommend_holiday {
       width: 80%;
       margin-left: 10%;
       margin-right: 10%;
@@ -293,24 +301,24 @@ This is a static survey form from freeCodeCamp
 
       <br>
       <br>
-      <label for="recommend" id="recommend-label">Do you want a grace period? For how long?</label><br><br>
-      <label id="recommend">
+      <label for="recommend_grace" id="recommend-label">Do you want a grace period? For how long?</label><br><br>
+      <label id="recommend_grace">
         <input type="radio" value="yes1" name="grace">Yes -1 month
       </label><br>
-      <label id="recommend">
+      <label id="recommend_grace">
         <input type="radio" value="yes2" name="grace">Yes -2 months
       </label><br>
-      <label id="recommend">
+      <label id="recommend_grace">
         <input type="radio" value="yes3" name="grace">Yes -3 months
       </label><br>
-      <label id="recommend">
+      <label id="recommend_grace">
         <input type="radio" value="no" name="grace">No
       </label>
       <br>
       <br>
 
-      <label for="recommend" id="recommend-label">Do you want a repayment holiday?</label><br><br>
-      <label id="recommend">
+      <label for="recommend_holiday" id="recommend-label">Do you want a repayment holiday?</label><br><br>
+      <label id="recommend_holiday">
         <input type="radio" value="yes" name="holiday">Yes
       </label>
 <label id="dropdown-label2" for="dropdown">Which months do you want a repayment holiday?</label>
@@ -349,7 +357,7 @@ This is a static survey form from freeCodeCamp
       </select>
       <br>
       <br>
-      <label id="recommend">
+      <label id="recommend_holiday">
         <input type="radio" value="no" name="holiday">No
       </label>
       <br>
@@ -370,6 +378,7 @@ This is a static survey form from freeCodeCamp
   </div>
 
 </body>
+
 
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MRDX8KP7"
