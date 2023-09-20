@@ -131,8 +131,9 @@ def payment_schedule():
     if grace_yn=='no' and holiday_yn=='no':
         num_months=12
         loc_start_month=options_month.index(start_month)
-        std_loan_noapprox.append(monthly_share)
-        flexible_loan_noapprox.append(monthly_share)
+        for i in range(num_months):
+            std_loan_noapprox.append(monthly_share)
+            flexible_loan_noapprox.append(monthly_share)
         
         if frequency=="monthly":
             for i in range(num_months):
