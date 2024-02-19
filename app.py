@@ -93,7 +93,7 @@ def payment_schedule():
 
         holiday_txt=f"Repayment holiday applied for {holiday_dur} months: {holiday_months} \n"
 
-    # #ideal v1 assumes dispersment starts tomorrow
+    # #ideal v1 assumes disbursement starts tomorrow
     # tom_date = datetime.now()+timedelta(1)
     # tom_month=tom_date.strftime("%b")
     # start_month=tom_month.lower()
@@ -102,7 +102,7 @@ def payment_schedule():
     start_month=options_month[options_month.index(this_month)+1]
     
     loan_amount_txt=f"Loan amount is {loan_size} EGP"
-    start_month_txt=f"Dispersment starts in {str(start_month)}\n"
+    start_month_txt=f"Disbursement starts in {str(start_month)}\n"
     frequency_txt=f"{frequency.capitalize()} payment"
 #    print(str(start_month_txt),frequency_txt,grace_txt,holiday_txt)
 
